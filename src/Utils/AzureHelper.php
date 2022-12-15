@@ -322,6 +322,8 @@ class AzureHelper
                             'primary' => true
                         ]];
                     }
+                } else {
+                    $result[$keys[0]][$keys[1]] = $object->$value;
                 }
             } elseif ($key === "members") {
                 $result[$key] = [];
