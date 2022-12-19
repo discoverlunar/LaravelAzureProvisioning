@@ -146,8 +146,12 @@ class UsersResourceType extends ResourceType
             case "add":
                 if (isset($operation['path'])) {
                     $attribute = $this->getMappingForAttribute($operation['path']);
-                    foreach ($operation['value'] as $value) {
-                        $object->{$attribute}->add($value);
+                    if (is_iterable($operation['value'])) {
+                        foreach ($operation['value'] as $value) {
+                            $object->{$attribute}->add($value);
+                        }
+                    } else {
+                        $object->{$attribute} = $operation['value'];
                     }
                 } else {
                     foreach ($operation['value'] as $key => $value) {
