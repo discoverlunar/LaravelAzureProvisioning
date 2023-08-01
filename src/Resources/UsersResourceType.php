@@ -156,8 +156,12 @@ class UsersResourceType extends ResourceType
                 } else {
                     foreach ($operation['value'] as $key => $value) {
                         $attribute = $this->getMappingForAttribute($key);
-                        foreach ($value as $v) {
-                            $object->{$attribute}->add($v);
+                        if (is_iterable($value)) {
+                            foreach ($value as $v) {
+                                $object->{$attribute}->add($v);
+                            }
+                        } else {
+                            $object->{$attribute} = $value;
                         }
                     }
                 }
